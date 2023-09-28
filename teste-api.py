@@ -11,9 +11,13 @@ def hello():
 def get_all():
     return db.carros
 
+@app.routes("carros/<id>", methods['GET'])
 def get_id(id):
     for car in db.carros:
         if car['id'] == id:
-            return car 
+            return car, 200 
+        
+        info = {'msg': "Nao encontrado"}
+        return info, 404         
 
 app.run(debug=True)
